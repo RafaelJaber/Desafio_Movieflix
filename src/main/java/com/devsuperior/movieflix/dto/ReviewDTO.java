@@ -1,5 +1,7 @@
 package com.devsuperior.movieflix.dto;
 
+import com.devsuperior.movieflix.entities.Review;
+import com.devsuperior.movieflix.entities.User;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -16,7 +18,32 @@ public class ReviewDTO {
     private Long userId;
     private String userName;
     private String userEmail;
-    
+
+	public ReviewDTO() {}
+
+	public ReviewDTO(Long id, String text, Long movieId, Long userId, String userName, String userEmail) {
+		this.id = id;
+		this.text = text;
+		this.movieId = movieId;
+		this.userId = userId;
+	}
+
+	public ReviewDTO(Review entity) {
+		this.id = entity.getId();
+		this.text = entity.getText();
+		this.movieId = entity.getMovie().getId();
+		this.userId = entity.getUser().getId();
+	}
+
+	public ReviewDTO(Review entity, User userEntity) {
+		this.id = entity.getId();
+		this.text = entity.getText();
+		this.movieId = entity.getMovie().getId();
+		this.userId = entity.getUser().getId();
+		this.userName = userEntity.getName();
+		this.userEmail = userEntity.getEmail();
+	}
+
 	public Long getId() {
 		return id;
 	}
